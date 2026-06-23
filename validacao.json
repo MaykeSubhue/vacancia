@@ -12,15 +12,29 @@
   "unidades": [
     "Albert Schweitzer",
     "Alexander Fleming",
+    "Andarai",
     "Carmela Dutra",
     "Fernando Magalhaes",
     "Herculano Pinheiro",
+    "Hospital Municipal Albert Schweitzer",
+    "Hospital Municipal Lourenço Jorge",
+    "Hospital Municipal Miguel Couto",
+    "Hospital Municipal Pedro II",
+    "Hospital Municipal Rocha Faria",
+    "Hospital Municipal Salgado Filho",
+    "Hospital Municipal Souza Aguiar",
     "Leila Diniz",
     "Maternidade Maria Amélia",
     "Rocha Faria"
   ],
   "igedes_source_updated_to": "Vacancias Maternidades Igedes (4).xls",
-  "total_records": 100,
-  "total_quantity": 155,
-  "rocha_faria_total": 16
+  "total_records": 344,
+  "total_quantity": 399,
+  "rocha_faria_total": 16,
+  "superintendencias": {
+    "SHPM": 84,
+    "SUE": 260
+  },
+  "sue_pdf_records": 244,
+  "sue_pdf_quantity": 244
 }
