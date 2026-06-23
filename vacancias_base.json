@@ -922,5 +922,181 @@
     "quantidade": 1,
     "observacao": "",
     "origem": "Vacancias Maternidades Igedes (4).xls"
+  },
+  {
+    "id": 85,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Segunda",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 86,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Segunda",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 87,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Segunda",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 88,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Terça",
+    "turno": "Dia",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 89,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Terça",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 90,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quarta",
+    "turno": "Dia",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 91,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quarta",
+    "turno": "Dia",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 92,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quarta",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 93,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quarta",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 94,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quinta",
+    "turno": "Dia",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 95,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quinta",
+    "turno": "Dia",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 96,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quinta",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 97,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quinta",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 98,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quinta",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 99,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Quinta",
+    "turno": "Noite",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
+  },
+  {
+    "id": 100,
+    "unidade": "Rocha Faria",
+    "especialidade": "Ginecologista",
+    "categoria": "Vacância",
+    "dia_semana": "Sexta",
+    "turno": "Dia",
+    "quantidade": 1,
+    "observacao": "",
+    "origem": "Rocha Faria - detalhamento manual informado em 23/06/2026"
   }
 ]

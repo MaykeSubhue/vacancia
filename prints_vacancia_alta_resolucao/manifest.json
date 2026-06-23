@@ -3,7 +3,7 @@
     "unidade": "Todas",
     "arquivo": "C:\\Users\\0768135\\Documents\\Codex\\2026-06-23\\va\\outputs\\prints_vacancia_alta_resolucao\\vacancia-todas-alta-resolucao.png",
     "largura": 3000,
-    "altura": 2210
+    "altura": 2603
   },
   {
     "unidade": "Albert Schweitzer",
@@ -46,5 +46,11 @@
     "arquivo": "C:\\Users\\0768135\\Documents\\Codex\\2026-06-23\\va\\outputs\\prints_vacancia_alta_resolucao\\vacancia-maternidade-maria-amelia-alta-resolucao.png",
     "largura": 3000,
     "altura": 1027
+  },
+  {
+    "unidade": "Rocha Faria",
+    "arquivo": "C:\\Users\\0768135\\Documents\\Codex\\2026-06-23\\va\\outputs\\prints_vacancia_alta_resolucao\\vacancia-rocha-faria-alta-resolucao.png",
+    "largura": 3000,
+    "altura": 1030
   }
 ]
