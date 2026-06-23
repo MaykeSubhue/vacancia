@@ -1,0 +1,85 @@
+﻿id,unidade,especialidade,categoria,dia_semana,turno,quantidade,observacao,origem
+1,Maternidade Maria Amélia,Pediatria,Vacância - Plantão,Segunda,Noite,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+2,Maternidade Maria Amélia,Pediatria,Vacância - Plantão,Terça,Noite,2,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+3,Maternidade Maria Amélia,Pediatria,Vacância - Plantão,Quarta,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+4,Maternidade Maria Amélia,Pediatria,Vacância - Plantão,Quinta,Noite,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+5,Maternidade Maria Amélia,Pediatria,Licença - Plantão,Quarta,Noite,2,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+6,Maternidade Maria Amélia,Pediatria,Licença - Plantão,Quinta,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+7,Maternidade Maria Amélia,Pediatria,Licença - Plantão,Quinta,Noite,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+8,Maternidade Maria Amélia,Pediatria,Licença - Plantão,Sexta,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+9,Maternidade Maria Amélia,Pediatria,Vacância - Rotina,Terça,Dia,2,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+10,Maternidade Maria Amélia,Pediatria,Licença - Rotina,Terça,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+11,Maternidade Maria Amélia,Pediatria,Licença - Rotina,Quinta,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+12,Maternidade Maria Amélia,Obstetrícia,Plantão,Segunda,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+13,Maternidade Maria Amélia,Obstetrícia,Plantão,Terça,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+14,Maternidade Maria Amélia,Obstetrícia,Plantão,Sexta,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+15,Maternidade Maria Amélia,Obstetrícia,Licença - Plantão,Segunda,Noite,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+16,Maternidade Maria Amélia,Obstetrícia,Licença - Plantão,Quarta,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+17,Maternidade Maria Amélia,Obstetrícia,Licença - Plantão,Quinta,Noite,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+18,Maternidade Maria Amélia,Obstetrícia,Rotina,Quarta,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+19,Maternidade Maria Amélia,Obstetrícia,Rotina,Sexta,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+20,Maternidade Maria Amélia,Obstetrícia,Rotina,Domingo,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+21,Maternidade Maria Amélia,Obstetrícia,Licença - Rotina,Segunda,Dia,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+22,Maternidade Maria Amélia,Anestesista,Plantão,Sábado,Noite,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+23,Maternidade Maria Amélia,Anestesista,Licença - Plantão,Domingo,Noite,1,,VACÂNCIAS - EQUIPE MÉDICA (1).xlsx
+24,Albert Schweitzer,Ginecologista,Vacância,Sábado,Não informado,1,,vacâncias Albert 23 06 2026.xls
+25,Albert Schweitzer,Ginecologista,Vacância,Domingo,Não informado,1,,vacâncias Albert 23 06 2026.xls
+26,Albert Schweitzer,Ginecologista,Rotina,Quarta,Não informado,1,4ª f e 6ª f,vacâncias Albert 23 06 2026.xls
+27,Albert Schweitzer,Ginecologista,Rotina,Sexta,Não informado,1,4ª f e 6ª f,vacâncias Albert 23 06 2026.xls
+28,Leila Diniz,Obstetra,Vacância,Segunda,Dia,1,,Vacancias Maternidades Igedes (4).xls
+29,Leila Diniz,Obstetra,Vacância,Quinta,Dia,1,,Vacancias Maternidades Igedes (4).xls
+30,Leila Diniz,Obstetra,Vacância,Segunda,Noite,1,visita obstetricia - 3 VACANCIAS,Vacancias Maternidades Igedes (4).xls
+31,Leila Diniz,Obstetra,Vacância,Terça,Noite,1,visita obstetricia - 3 VACANCIAS,Vacancias Maternidades Igedes (4).xls
+32,Leila Diniz,Obstetra,Vacância,Sexta,Noite,4,visita obstetricia - 3 VACANCIAS,Vacancias Maternidades Igedes (4).xls
+33,Leila Diniz,Neonatologista,Vacância,Sexta,Dia,3,PNAR - 3 VACANCIAS,Vacancias Maternidades Igedes (4).xls
+34,Leila Diniz,Neonatologista,Vacância,Segunda,Noite,1,,Vacancias Maternidades Igedes (4).xls
+35,Leila Diniz,Neonatologista,Vacância,Quinta,Noite,3,,Vacancias Maternidades Igedes (4).xls
+36,Leila Diniz,Neonatologista,Vacância,Sexta,Noite,1,,Vacancias Maternidades Igedes (4).xls
+37,Leila Diniz,Anestesista,Vacância,Sábado,Dia,3,,Vacancias Maternidades Igedes (4).xls
+38,Leila Diniz,Anestesista,Vacância,Sábado,Noite,1,,Vacancias Maternidades Igedes (4).xls
+39,Herculano Pinheiro,Obstetra,Vacância,Quarta,Dia,1,,Vacancias Maternidades Igedes (4).xls
+40,Herculano Pinheiro,Obstetra,Vacância,Quinta,Dia,1,,Vacancias Maternidades Igedes (4).xls
+41,Herculano Pinheiro,Obstetra,Vacância,Terça,Noite,2,,Vacancias Maternidades Igedes (4).xls
+42,Herculano Pinheiro,Obstetra,Vacância,Quinta,Noite,3,,Vacancias Maternidades Igedes (4).xls
+43,Herculano Pinheiro,Anestesista,Vacância,Sexta,Dia,1,,Vacancias Maternidades Igedes (4).xls
+44,Carmela Dutra,Obstetra,Vacância,Terça,Dia,1,,Vacancias Maternidades Igedes (4).xls
+45,Carmela Dutra,Obstetra,Vacância,Quinta,Dia,2,,Vacancias Maternidades Igedes (4).xls
+46,Carmela Dutra,Obstetra,Vacância,Sexta,Dia,2,,Vacancias Maternidades Igedes (4).xls
+47,Carmela Dutra,Obstetra,Vacância,Quarta,Noite,2,,Vacancias Maternidades Igedes (4).xls
+48,Carmela Dutra,Neonatologista,Vacância,Terça,Dia,1,rotina neo - 48 horas de vacancias,Vacancias Maternidades Igedes (4).xls
+49,Carmela Dutra,Neonatologista,Vacância,Quarta,Dia,1,rotina neo - 48 horas de vacancias,Vacancias Maternidades Igedes (4).xls
+50,Carmela Dutra,Neonatologista,Vacância,Quinta,Dia,2,rotina neo - 48 horas de vacancias,Vacancias Maternidades Igedes (4).xls
+51,Carmela Dutra,Neonatologista,Vacância,Sexta,Dia,3,rotina neo - 48 horas de vacancias,Vacancias Maternidades Igedes (4).xls
+52,Carmela Dutra,Anestesista,Vacância,Sábado,Dia,1,,Vacancias Maternidades Igedes (4).xls
+53,Carmela Dutra,Anestesista,Vacância,Sábado,Noite,1,,Vacancias Maternidades Igedes (4).xls
+54,Alexander Fleming,Obstetra,Vacância,Segunda,Dia,4,Visita obstetricia10 vacancias,Vacancias Maternidades Igedes (4).xls
+55,Alexander Fleming,Obstetra,Vacância,Terça,Dia,3,Visita obstetricia10 vacancias,Vacancias Maternidades Igedes (4).xls
+56,Alexander Fleming,Obstetra,Vacância,Quarta,Dia,5,Visita obstetricia10 vacancias,Vacancias Maternidades Igedes (4).xls
+57,Alexander Fleming,Obstetra,Vacância,Quinta,Dia,4,Visita obstetricia10 vacancias,Vacancias Maternidades Igedes (4).xls
+58,Alexander Fleming,Obstetra,Vacância,Sexta,Dia,5,Visita obstetricia10 vacancias,Vacancias Maternidades Igedes (4).xls
+59,Alexander Fleming,Obstetra,Vacância,Segunda,Noite,2,PNAR 6 vacâncias,Vacancias Maternidades Igedes (4).xls
+60,Alexander Fleming,Obstetra,Vacância,Terça,Noite,2,PNAR 6 vacâncias,Vacancias Maternidades Igedes (4).xls
+61,Alexander Fleming,Obstetra,Vacância,Sexta,Noite,3,PNAR 6 vacâncias,Vacancias Maternidades Igedes (4).xls
+62,Alexander Fleming,Anestesista,Vacância,Quarta,Dia,1,,Vacancias Maternidades Igedes (4).xls
+63,Alexander Fleming,Anestesista,Vacância,Sábado,Dia,3,,Vacancias Maternidades Igedes (4).xls
+64,Alexander Fleming,Anestesista,Vacância,Domingo,Dia,2,,Vacancias Maternidades Igedes (4).xls
+65,Alexander Fleming,Anestesista,Vacância,Segunda,Noite,1,,Vacancias Maternidades Igedes (4).xls
+66,Alexander Fleming,Anestesista,Vacância,Sexta,Noite,1,,Vacancias Maternidades Igedes (4).xls
+67,Alexander Fleming,Anestesista,Vacância,Sábado,Noite,3,,Vacancias Maternidades Igedes (4).xls
+68,Alexander Fleming,Anestesista,Vacância,Domingo,Noite,2,,Vacancias Maternidades Igedes (4).xls
+69,Alexander Fleming,Neonatologista,Vacância,Sexta,Dia,1,,Vacancias Maternidades Igedes (4).xls
+70,Alexander Fleming,Neonatologista,Vacância,Sexta,Noite,1,,Vacancias Maternidades Igedes (4).xls
+71,Fernando Magalhaes,Ginecologista,Vacância,Terça,Dia,1,,Vacancias Maternidades Igedes (4).xls
+72,Fernando Magalhaes,Ginecologista,Vacância,Quarta,Dia,1,,Vacancias Maternidades Igedes (4).xls
+73,Fernando Magalhaes,Ginecologista,Vacância,Quarta,Noite,1,,Vacancias Maternidades Igedes (4).xls
+74,Fernando Magalhaes,Anestesista,Vacância,Quarta,Dia,1,,Vacancias Maternidades Igedes (4).xls
+75,Fernando Magalhaes,Anestesista,Vacância,Sábado,Dia,5,,Vacancias Maternidades Igedes (4).xls
+76,Fernando Magalhaes,Anestesista,Vacância,Quarta,Noite,1,,Vacancias Maternidades Igedes (4).xls
+77,Fernando Magalhaes,Anestesista,Vacância,Sábado,Noite,5,,Vacancias Maternidades Igedes (4).xls
+78,Fernando Magalhaes,Clínica médica,Vacância,Segunda,Não informado,1,,Vacancias Maternidades Igedes (4).xls
+79,Fernando Magalhaes,Clínica médica,Vacância,Terça,Não informado,1,,Vacancias Maternidades Igedes (4).xls
+80,Fernando Magalhaes,Clínica médica,Vacância,Quarta,Não informado,1,,Vacancias Maternidades Igedes (4).xls
+81,Fernando Magalhaes,Clínica médica,Vacância,Quinta,Não informado,1,,Vacancias Maternidades Igedes (4).xls
+82,Fernando Magalhaes,Clínica médica,Vacância,Sexta,Não informado,1,,Vacancias Maternidades Igedes (4).xls
+83,Fernando Magalhaes,Clínica médica,Vacância,Sábado,Não informado,1,,Vacancias Maternidades Igedes (4).xls
+84,Fernando Magalhaes,Clínica médica,Vacância,Domingo,Não informado,1,,Vacancias Maternidades Igedes (4).xls

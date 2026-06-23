@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vacâncias e Ausências - Maternidades</title>
+<style>
+  :root {
+    --ink: #143241;
+    --muted: #5e7180;
+    --panel: #ffffff;
+    --soft: #f4f7f8;
+    --line: #d8e3e7;
+    --teal: #0f4c5c;
+    --teal-2: #176b78;
+    --blue: #2f6f9f;
+    --rose: #f8dfe1;
+    --rose-line: #edc1c6;
+    --rose-ink: #943a45;
+    --green: #cfe7cf;
+    --yellow: #fff2c7;
+    --shadow: 0 14px 30px rgba(19, 50, 65, .12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--ink);
+    background: #eef4f6;
+    line-height: 1.45;
+  }
+  .wrap { width: min(1320px, calc(100% - 28px)); margin: 0 auto; padding: 22px 0 44px; }
+  header {
+    background: var(--teal);
+    color: #fff;
+    border-radius: 8px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  header h1 { margin: 0; font-size: clamp(1.35rem, 2vw, 2rem); letter-spacing: 0; }
+  header p { margin: 8px 0 0; max-width: 920px; color: #d9ebef; }
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .kpi {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: 0 8px 18px rgba(19, 50, 65, .07);
+  }
+  .kpi .num { font-size: 1.65rem; font-weight: 800; color: var(--teal); }
+  .kpi .lbl { color: var(--muted); font-size: .78rem; text-transform: uppercase; font-weight: 700; margin-top: 2px; }
+  section {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px;
+    margin-top: 16px;
+    box-shadow: 0 10px 24px rgba(19, 50, 65, .08);
+  }
+  h2 {
+    margin: 0 0 14px;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2 span {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: var(--teal);
+    color: #fff;
+    font-size: .82rem;
+  }
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: end;
+    margin-bottom: 12px;
+  }
+  label { display: grid; gap: 4px; font-size: .75rem; color: var(--muted); font-weight: 700; }
+  select, input {
+    min-height: 36px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 7px 10px;
+    color: var(--ink);
+    background: #fff;
+    font: inherit;
+  }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(160px, 1fr));
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .day {
+    min-width: 160px;
+    background: #f9fbfc;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .day-head {
+    background: var(--teal);
+    color: #fff;
+    padding: 9px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  .badge {
+    background: rgba(255,255,255,.18);
+    min-width: 24px;
+    height: 22px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+  }
+  .day-body { padding: 9px; min-height: 170px; display: grid; gap: 8px; align-content: start; }
+  .empty { color: #8796a0; font-size: .8rem; text-align: center; padding: 28px 4px; }
+  .vac-card {
+    background: var(--rose);
+    border: 1px solid var(--rose-line);
+    border-radius: 7px;
+    padding: 8px;
+    display: grid;
+    gap: 4px;
+  }
+  .vac-card strong { color: var(--rose-ink); font-size: .82rem; line-height: 1.15; }
+  .vac-meta { font-size: .68rem; color: #7a4d55; text-transform: uppercase; font-weight: 800; }
+  .vac-qty { color: var(--rose-ink); font-size: .74rem; font-weight: 800; }
+  .obs { color: #6d5960; font-size: .72rem; }
+  .tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: .82rem; }
+  th, td { padding: 8px 9px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: var(--teal); color: #fff; font-size: .72rem; text-transform: uppercase; letter-spacing: 0; }
+  tbody tr:nth-child(even) td { background: #f8fbfc; }
+  td.num, th.num { text-align: right; }
+  .grade td, .grade th { text-align: center; }
+  .grade td:first-child, .grade th:first-child,
+  .grade td:nth-child(2), .grade th:nth-child(2) { text-align: left; }
+  .grade .unit { background: #eef6f8; color: var(--ink); font-weight: 800; }
+  .grade .esp { background: var(--teal); color: #fff; font-weight: 800; }
+  .grade .total { background: var(--teal-2); color: #fff; font-weight: 800; }
+  .grade .hit { background: #b7d5ec; color: #163d5a; font-weight: 800; }
+  .grade .sem { background: #e8f2f7; color: #356070; font-weight: 700; }
+  .grade .rod { background: var(--blue); color: #fff; font-weight: 800; }
+  .note {
+    margin-top: 12px;
+    background: #edf6f7;
+    border-left: 4px solid var(--teal-2);
+    border-radius: 7px;
+    padding: 12px 14px;
+    color: #315461;
+    font-size: .86rem;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .summary-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px;
+    background: #fbfcfd;
+  }
+  .summary-card h3 { margin: 0 0 10px; font-size: .92rem; color: var(--teal); }
+  .summary-line { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px solid #e6eef1; font-size: .82rem; }
+  .summary-line:last-child { border-bottom: 0; }
+  footer { text-align: center; color: var(--muted); font-size: .76rem; padding: 22px 0 0; }
+  @media (max-width: 860px) {
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    section { padding: 14px; }
+  }
+  @media (max-width: 560px) {
+    .wrap { width: min(100% - 18px, 1320px); }
+    .kpis { grid-template-columns: 1fr; }
+    header { padding: 18px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none; }
+    section, header, .kpi { box-shadow: none; }
+    .board { overflow: visible; grid-template-columns: repeat(7, 1fr); }
+    * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Vacâncias e Ausências - Maternidades</h1>`r`n  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <h2><span>1</span> Grade Global - Ausências, Vacâncias e Licenças por Dia</h2>
+    <div class="toolbar">
+      <label>Unidade<select id="gradeUnitFilter"></select></label>
+    </div>
+    <div class="tbl-wrap">
+      <table class="grade">
+        <thead>
+          <tr><th>Unidade</th><th>Especialidade</th><th class="num">Total</th><th>Segunda</th><th>Terça</th><th>Quarta</th><th>Quinta</th><th>Sexta</th><th>Sábado</th><th>Domingo</th></tr>
+        </thead>
+        <tbody id="globalGrade"></tbody>
+      </table>
+    </div>
+    <div class="note">Esta grade usa a base consolidada de todas as unidades. Use o filtro para ver uma unidade por vez. As células “ROD.” indicam rodízio informado na planilha original; “-” indica ausência de registro numérico naquele dia.</div>
+  </section>
+
+  <section>
+    <h2><span>2</span> Vacâncias e Licenças por Dia</h2>
+    <div class="toolbar">
+      <label>Unidade<select id="unitFilter"></select></label>
+      <label>Origem<select id="sourceFilter"></select></label>
+      <label>Buscar<input id="searchFilter" type="search" placeholder="Especialidade, turno, observação"></label>
+    </div>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section>
+    <h2><span>3</span> Tabela Auditável</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Unidade</th><th>Especialidade</th><th>Categoria</th><th>Dia</th><th>Turno</th><th class="num">Qtd.</th><th>Observação</th><th>Origem</th></tr></thead>
+        <tbody id="auditRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span>4</span> Resumo IGEDES por Maternidade</h2>
+    <div class="summary-grid" id="igedesSummary"></div>
+  </section>
+
+  <footer>Gerado em 23/06/2026 - IGEDES atualizado com Vacancias Maternidades Igedes (4).xls.</footer>
+</div>
+
+<script id="data" type="application/json">{"records": [{"id": 1, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Plantão", "dia_semana": "Segunda", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 2, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Plantão", "dia_semana": "Terça", "turno": "Noite", "quantidade": 2, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 3, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Plantão", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 4, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Plantão", "dia_semana": "Quinta", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 5, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Plantão", "dia_semana": "Quarta", "turno": "Noite", "quantidade": 2, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 6, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Plantão", "dia_semana": "Quinta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 7, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Plantão", "dia_semana": "Quinta", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 8, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Plantão", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 9, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Rotina", "dia_semana": "Terça", "turno": "Dia", "quantidade": 2, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 10, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Rotina", "dia_semana": "Terça", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 11, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Rotina", "dia_semana": "Quinta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 12, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Plantão", "dia_semana": "Segunda", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 13, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Plantão", "dia_semana": "Terça", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 14, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Plantão", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 15, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Licença - Plantão", "dia_semana": "Segunda", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 16, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Licença - Plantão", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 17, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Licença - Plantão", "dia_semana": "Quinta", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 18, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Rotina", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 19, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Rotina", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 20, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Rotina", "dia_semana": "Domingo", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 21, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Licença - Rotina", "dia_semana": "Segunda", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 22, "unidade": "Maternidade Maria Amélia", "especialidade": "Anestesista", "categoria": "Plantão", "dia_semana": "Sábado", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 23, "unidade": "Maternidade Maria Amélia", "especialidade": "Anestesista", "categoria": "Licença - Plantão", "dia_semana": "Domingo", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 24, "unidade": "Albert Schweitzer", "especialidade": "Ginecologista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "vacâncias Albert 23 06 2026.xls"}, {"id": 25, "unidade": "Albert Schweitzer", "especialidade": "Ginecologista", "categoria": "Vacância", "dia_semana": "Domingo", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "vacâncias Albert 23 06 2026.xls"}, {"id": 26, "unidade": "Albert Schweitzer", "especialidade": "Ginecologista", "categoria": "Rotina", "dia_semana": "Quarta", "turno": "Não informado", "quantidade": 1, "observacao": "4ª f e 6ª f", "origem": "vacâncias Albert 23 06 2026.xls"}, {"id": 27, "unidade": "Albert Schweitzer", "especialidade": "Ginecologista", "categoria": "Rotina", "dia_semana": "Sexta", "turno": "Não informado", "quantidade": 1, "observacao": "4ª f e 6ª f", "origem": "vacâncias Albert 23 06 2026.xls"}, {"id": 28, "unidade": "Leila Diniz", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Segunda", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 29, "unidade": "Leila Diniz", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Quinta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 30, "unidade": "Leila Diniz", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Segunda", "turno": "Noite", "quantidade": 1, "observacao": "visita obstetricia - 3 VACANCIAS", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 31, "unidade": "Leila Diniz", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Terça", "turno": "Noite", "quantidade": 1, "observacao": "visita obstetricia - 3 VACANCIAS", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 32, "unidade": "Leila Diniz", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Noite", "quantidade": 4, "observacao": "visita obstetricia - 3 VACANCIAS", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 33, "unidade": "Leila Diniz", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 3, "observacao": "PNAR - 3 VACANCIAS", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 34, "unidade": "Leila Diniz", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Segunda", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 35, "unidade": "Leila Diniz", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Quinta", "turno": "Noite", "quantidade": 3, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 36, "unidade": "Leila Diniz", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 37, "unidade": "Leila Diniz", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 3, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 38, "unidade": "Leila Diniz", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 39, "unidade": "Herculano Pinheiro", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 40, "unidade": "Herculano Pinheiro", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Quinta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 41, "unidade": "Herculano Pinheiro", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Terça", "turno": "Noite", "quantidade": 2, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 42, "unidade": "Herculano Pinheiro", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Quinta", "turno": "Noite", "quantidade": 3, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 43, "unidade": "Herculano Pinheiro", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 44, "unidade": "Carmela Dutra", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Terça", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 45, "unidade": "Carmela Dutra", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Quinta", "turno": "Dia", "quantidade": 2, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 46, "unidade": "Carmela Dutra", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 2, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 47, "unidade": "Carmela Dutra", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Noite", "quantidade": 2, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 48, "unidade": "Carmela Dutra", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Terça", "turno": "Dia", "quantidade": 1, "observacao": "rotina neo - 48 horas de vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 49, "unidade": "Carmela Dutra", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 1, "observacao": "rotina neo - 48 horas de vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 50, "unidade": "Carmela Dutra", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Quinta", "turno": "Dia", "quantidade": 2, "observacao": "rotina neo - 48 horas de vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 51, "unidade": "Carmela Dutra", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 3, "observacao": "rotina neo - 48 horas de vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 52, "unidade": "Carmela Dutra", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 53, "unidade": "Carmela Dutra", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 54, "unidade": "Alexander Fleming", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Segunda", "turno": "Dia", "quantidade": 4, "observacao": "Visita obstetricia10 vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 55, "unidade": "Alexander Fleming", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Terça", "turno": "Dia", "quantidade": 3, "observacao": "Visita obstetricia10 vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 56, "unidade": "Alexander Fleming", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 5, "observacao": "Visita obstetricia10 vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 57, "unidade": "Alexander Fleming", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Quinta", "turno": "Dia", "quantidade": 4, "observacao": "Visita obstetricia10 vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 58, "unidade": "Alexander Fleming", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 5, "observacao": "Visita obstetricia10 vacancias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 59, "unidade": "Alexander Fleming", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Segunda", "turno": "Noite", "quantidade": 2, "observacao": "PNAR 6 vacâncias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 60, "unidade": "Alexander Fleming", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Terça", "turno": "Noite", "quantidade": 2, "observacao": "PNAR 6 vacâncias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 61, "unidade": "Alexander Fleming", "especialidade": "Obstetra", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Noite", "quantidade": 3, "observacao": "PNAR 6 vacâncias", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 62, "unidade": "Alexander Fleming", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 63, "unidade": "Alexander Fleming", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 3, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 64, "unidade": "Alexander Fleming", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Domingo", "turno": "Dia", "quantidade": 2, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 65, "unidade": "Alexander Fleming", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Segunda", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 66, "unidade": "Alexander Fleming", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 67, "unidade": "Alexander Fleming", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Noite", "quantidade": 3, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 68, "unidade": "Alexander Fleming", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Domingo", "turno": "Noite", "quantidade": 2, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 69, "unidade": "Alexander Fleming", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 70, "unidade": "Alexander Fleming", "especialidade": "Neonatologista", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 71, "unidade": "Fernando Magalhaes", "especialidade": "Ginecologista", "categoria": "Vacância", "dia_semana": "Terça", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 72, "unidade": "Fernando Magalhaes", "especialidade": "Ginecologista", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 73, "unidade": "Fernando Magalhaes", "especialidade": "Ginecologista", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 74, "unidade": "Fernando Magalhaes", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Dia", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 75, "unidade": "Fernando Magalhaes", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 5, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 76, "unidade": "Fernando Magalhaes", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Noite", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 77, "unidade": "Fernando Magalhaes", "especialidade": "Anestesista", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Noite", "quantidade": 5, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 78, "unidade": "Fernando Magalhaes", "especialidade": "Clínica médica", "categoria": "Vacância", "dia_semana": "Segunda", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 79, "unidade": "Fernando Magalhaes", "especialidade": "Clínica médica", "categoria": "Vacância", "dia_semana": "Terça", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 80, "unidade": "Fernando Magalhaes", "especialidade": "Clínica médica", "categoria": "Vacância", "dia_semana": "Quarta", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 81, "unidade": "Fernando Magalhaes", "especialidade": "Clínica médica", "categoria": "Vacância", "dia_semana": "Quinta", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 82, "unidade": "Fernando Magalhaes", "especialidade": "Clínica médica", "categoria": "Vacância", "dia_semana": "Sexta", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 83, "unidade": "Fernando Magalhaes", "especialidade": "Clínica médica", "categoria": "Vacância", "dia_semana": "Sábado", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}, {"id": 84, "unidade": "Fernando Magalhaes", "especialidade": "Clínica médica", "categoria": "Vacância", "dia_semana": "Domingo", "turno": "Não informado", "quantidade": 1, "observacao": "", "origem": "Vacancias Maternidades Igedes (4).xls"}], "rodizios": [{"id": 1, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Plantão", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 2, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Plantão", "dia_semana": "Domingo", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 3, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Plantão", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 4, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Plantão", "dia_semana": "Domingo", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 5, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Rotina", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 6, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Vacância - Rotina", "dia_semana": "Domingo", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 7, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Rotina", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 8, "unidade": "Maternidade Maria Amélia", "especialidade": "Pediatria", "categoria": "Licença - Rotina", "dia_semana": "Domingo", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 9, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Plantão", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 10, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Plantão", "dia_semana": "Domingo", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 11, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Licença - Plantão", "dia_semana": "Sábado", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}, {"id": 12, "unidade": "Maternidade Maria Amélia", "especialidade": "Obstetrícia", "categoria": "Licença - Plantão", "dia_semana": "Domingo", "turno": "Dia", "quantidade": 0, "observacao": "Rodízio", "origem": "VACÂNCIAS - EQUIPE MÉDICA (1).xlsx"}], "igedesSummary": [{"unidade": "Leila Diniz", "especialidade": "Clinico", "quantidade": 6, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Leila Diniz", "especialidade": "Endocrino", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Leila Diniz", "especialidade": "Ginecologista", "quantidade": 16, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Leila Diniz", "especialidade": "Infecto", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Leila Diniz", "especialidade": "Neoped", "quantidade": 8, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Leila Diniz", "especialidade": "Neuroped", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Leila Diniz", "especialidade": "Ped NAIRR", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Leila Diniz", "especialidade": "Radiologista", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Leila Diniz", "especialidade": "Ultrassonografista", "quantidade": 7, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Herculano Pinheiro", "especialidade": "Ginecologista", "quantidade": -1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Herculano Pinheiro", "especialidade": "Neoped", "quantidade": 6, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Herculano Pinheiro", "especialidade": "Radiologista", "quantidade": 6, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Carmela Dutra", "especialidade": "Anestesio", "quantidade": 17, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Carmela Dutra", "especialidade": "Endocrino", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Carmela Dutra", "especialidade": "Ginecologista", "quantidade": -6, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Carmela Dutra", "especialidade": "Infecto", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Carmela Dutra", "especialidade": "Neoped", "quantidade": 3, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Carmela Dutra", "especialidade": "Neuroped", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Carmela Dutra", "especialidade": "Ped NAIRR", "quantidade": 5, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Alexander Fleming", "especialidade": "Eco fetal", "quantidade": 7, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Alexander Fleming", "especialidade": "Endocrino", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Alexander Fleming", "especialidade": "Ginecologista", "quantidade": 22, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Alexander Fleming", "especialidade": "Radiologista", "quantidade": 7, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Alexander Fleming", "especialidade": "Ultrassonografista", "quantidade": 15, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Alexander Fleming", "especialidade": "Neuroped", "quantidade": 1, "origem": "Vacancias Maternidades Igedes (4).xls"}, {"unidade": "Alexander Fleming", "especialidade": "Ped NAIRR", "quantidade": 3, "origem": "Vacancias Maternidades Igedes (4).xls"}], "generatedAt": "2026-06-23"}</script>
+<script>
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const DIAS = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+const records = DATA.records;
+
+function qtyText(q) {
+  return q === 1 ? "1 registro" : `${q} registros`;
+}
+function uniq(values) {
+  return [...new Set(values.filter(Boolean))].sort((a,b) => a.localeCompare(b, "pt-BR"));
+}
+function optionize(select, values, label) {
+  select.innerHTML = `<option value="">${label}</option>` + values.map(v => `<option value="${v}">${v}</option>`).join("");
+}
+function filteredRecords() {
+  const unit = document.getElementById("unitFilter").value;
+  const source = document.getElementById("sourceFilter").value;
+  const search = document.getElementById("searchFilter").value.trim().toLocaleLowerCase("pt-BR");
+  return records.filter(r => {
+    if (unit && r.unidade !== unit) return false;
+    if (source && r.origem !== source) return false;
+    if (search) {
+      const hay = `${r.unidade} ${r.especialidade} ${r.categoria} ${r.turno} ${r.observacao}`.toLocaleLowerCase("pt-BR");
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
+}
+function renderKpis() {
+  const total = records.reduce((sum, r) => sum + r.quantidade, 0);
+  const units = uniq(records.map(r => r.unidade)).length;
+  const igedes = records.filter(r => r.origem.includes("Igedes")).reduce((sum, r) => sum + r.quantidade, 0);
+  document.getElementById("kpis").innerHTML = [
+    [total, "Quantidade consolidada"],
+    [units, "Unidades"],
+    [igedes, "IGEDES semanal"]
+  ].map(([num, lbl]) => `<div class="kpi"><div class="num">${num}</div><div class="lbl">${lbl}</div></div>`).join("");
+}
+function renderGlobalGrade() {
+  const selectedUnit = document.getElementById("gradeUnitFilter").value;
+  const rows = selectedUnit ? records.filter(r => r.unidade === selectedUnit) : records;
+  const grouped = new Map();
+  rows.forEach(r => {
+    const key = `${r.unidade}||${r.especialidade}`;
+    if (!grouped.has(key)) {
+      grouped.set(key, { unidade: r.unidade, especialidade: r.especialidade, total: 0, dias: Object.fromEntries(DIAS.map(day => [day, 0])) });
+    }
+    const item = grouped.get(key);
+    item.total += r.quantidade;
+    item.dias[r.dia_semana] = (item.dias[r.dia_semana] || 0) + r.quantidade;
+  });
+  const sorted = [...grouped.values()].sort((a, b) =>
+    a.unidade.localeCompare(b.unidade, "pt-BR") || a.especialidade.localeCompare(b.especialidade, "pt-BR")
+  );
+  document.getElementById("globalGrade").innerHTML = sorted.map(item => {
+    const dayCells = DIAS.map(day => {
+      const value = item.dias[day] || 0;
+      const rod = DATA.rodizios.some(r => r.unidade === item.unidade && r.especialidade === item.especialidade && r.dia_semana === day);
+      if (value > 0) return `<td class="hit">${value}</td>`;
+      if (rod) return `<td class="rod">ROD.</td>`;
+      return `<td class="sem">-</td>`;
+    }).join("");
+    return `<tr><td class="unit">${item.unidade}</td><td class="esp">${item.especialidade}</td><td class="total num">${item.total}</td>${dayCells}</tr>`;
+  }).join("");
+}
+function card(record) {
+  const obs = record.observacao ? `<div class="obs">${record.observacao}</div>` : "";
+  return `<article class="vac-card">
+    <strong>${record.especialidade}</strong>
+    <div class="vac-meta">${record.unidade}</div>
+    <div class="vac-qty">${qtyText(record.quantidade)} - ${record.categoria} - ${record.turno}</div>
+    ${obs}
+  </article>`;
+}
+function renderBoard() {
+  const rows = filteredRecords();
+  document.getElementById("board").innerHTML = DIAS.map(day => {
+    const dayRows = rows.filter(r => r.dia_semana === day).sort((a,b) =>
+      a.unidade.localeCompare(b.unidade, "pt-BR") || a.especialidade.localeCompare(b.especialidade, "pt-BR")
+    );
+    return `<div class="day">
+      <div class="day-head"><span>${day}</span><span class="badge">${dayRows.length}</span></div>
+      <div class="day-body">${dayRows.length ? dayRows.map(card).join("") : '<div class="empty">Sem registros</div>'}</div>
+    </div>`;
+  }).join("");
+  renderAudit(rows);
+}
+function renderAudit(rows) {
+  document.getElementById("auditRows").innerHTML = rows.map(r => `<tr>
+    <td>${r.unidade}</td><td>${r.especialidade}</td><td>${r.categoria}</td><td>${r.dia_semana}</td>
+    <td>${r.turno}</td><td class="num">${r.quantidade}</td><td>${r.observacao}</td><td>${r.origem}</td>
+  </tr>`).join("");
+}
+function renderIgedesSummary() {
+  const grouped = {};
+  DATA.igedesSummary.forEach(row => {
+    grouped[row.unidade] ||= [];
+    grouped[row.unidade].push(row);
+  });
+  document.getElementById("igedesSummary").innerHTML = Object.entries(grouped).map(([unit, rows]) => {
+    const total = rows.reduce((sum, r) => sum + r.quantidade, 0);
+    return `<div class="summary-card"><h3>${unit} - total ${total}</h3>${rows.map(r =>
+      `<div class="summary-line"><span>${r.especialidade}</span><strong>${r.quantidade}</strong></div>`
+    ).join("")}</div>`;
+  }).join("");
+}
+optionize(document.getElementById("gradeUnitFilter"), uniq(records.map(r => r.unidade)), "Todas");
+optionize(document.getElementById("unitFilter"), uniq(records.map(r => r.unidade)), "Todas");
+optionize(document.getElementById("sourceFilter"), uniq(records.map(r => r.origem)), "Todas");
+document.getElementById("gradeUnitFilter").addEventListener("change", renderGlobalGrade);
+document.getElementById("unitFilter").addEventListener("change", renderBoard);
+document.getElementById("sourceFilter").addEventListener("change", renderBoard);
+document.getElementById("searchFilter").addEventListener("input", renderBoard);
+renderKpis();
+renderGlobalGrade();
+renderBoard();
+renderIgedesSummary();
+</script>
+</body>
+</html>
